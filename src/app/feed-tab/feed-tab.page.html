@@ -11,17 +11,11 @@
 
 
     <ion-list>
-      <ion-item *ngFor="let item of (results | async)" [routerLink]="['/', 'users', item.login]">
+      <ion-item *ngFor="let item of (users | async)" [routerLink]="['/', 'users', item.login]">
           {{item.login}}
 
       </ion-item>
     </ion-list>
-
-
-
-
-
-
 
 
   <ion-card class="welcome-card">

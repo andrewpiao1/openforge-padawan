@@ -12,17 +12,20 @@ import { AppComponent } from './app.component';
 // additional imports (added to NgModule imports as well)
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { UsersReducer} from './redux/users.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers, metaReducers } from './redux';
+import { effects } from './effects'
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
-    StoreModule.forRoot({ users: UsersReducer})
+    StoreModule.forRoot( reducers, { metaReducers }),
+    EffectsModule.forRoot(effects)
   ],
   providers: [
     StatusBar,
