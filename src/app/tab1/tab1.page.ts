@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from './../services/users.service';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit{
+export class Tab1Page {
 
-  results: Observable<any>;
+  constructor() {}
 
-
-  constructor(private usersService: UsersService) { }
-
-  ngOnInit() {}
 }

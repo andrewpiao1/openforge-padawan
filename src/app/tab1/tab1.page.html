@@ -7,28 +7,6 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list>
-
-    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'users', item.id]">
-      <ion-avatar slot="start">
-        <img [src]="item.avatar_url" *ngIf="item.avatar_url != 'N/A'">
-      </ion-avatar>
-
-      <ion-label text-wrap>
-        <h3>{{ item.login }}</h3>
-        {{ item.login }}
-      </ion-label>
-
-      <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
-      <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
-      <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
-
-    </ion-item>
-
-  </ion-list>
-
-
     <ion-card class="welcome-card">
       <img src="/assets/shapes.svg" alt="" />
       <ion-card-header>
