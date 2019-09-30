@@ -8,35 +8,35 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'feed-tab',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../feed-tab/feed-tab.module').then(m => m.FeedPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'users-tab',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../users-tab/users-tab.module').then(m => m.UsersPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/feed-tab',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/feed-tab',
     pathMatch: 'full'
   }
 ];
