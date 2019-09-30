@@ -33,14 +33,14 @@ export class UsersPage implements OnInit {
   retrieveUsername() {
     this.events.subscribe('transferredData', (data) => {
       console.log('transferred: ', data)
-      this.show = true;
       this.userQuery = data;
       this.searchUser(data);
     })
   }
 
   searchUser(username: string) {
-    console.log(username);
+    // console.log(username);
+    this.show = true;
     this.usersService.loadUserData(username)
       .then(res => {
         this.userData = res.data

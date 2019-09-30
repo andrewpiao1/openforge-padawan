@@ -29,7 +29,7 @@ export class FeedPage implements OnInit {
     private usersService: UsersService,
     public navCtrl: NavController,
     public events: Events) {
-    this.addMoreUsers();
+    // this.addMoreUsers();
    }
 
   ngOnInit() {
@@ -55,20 +55,20 @@ export class FeedPage implements OnInit {
     // console.log("data sent: ", data)
   }
 
-  loadUsers(event) {
-    setTimeout(() => {
-      console.log('Done');
-      this.addMoreUsers();
-      this.numTimesLeft -= 1;
-      event.target.complete();
-    }, 2000);
-  }
+  // loadUsers(event) {
+  //   setTimeout(() => {
+  //     console.log('Done');
+  //     this.addMoreUsers();
+  //     this.numTimesLeft -= 1;
+  //     event.target.complete();
+  //   }, 2000);
+  // }
 
-  addMoreUsers() {
-    for (let i = 0; i < 10; i++) {
-      this.users.push(i);
-    }
-  }
+  // addMoreUsers() {
+  //   for (let i = 0; i < 10; i++) {
+  //     this.users.push(i);
+  //   }
+  // }
 
   searchUser(username: string) {
     console.log('Username: ', username);

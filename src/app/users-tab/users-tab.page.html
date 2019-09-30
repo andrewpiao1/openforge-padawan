@@ -15,13 +15,18 @@
     ></ion-searchbar>
     <ion-card *ngIf="show">
       <ion-card-header>
-          <img src={{userData.avatar_url}}>
+          <ion-item>
+              <ion-avatar slot="start">
+                <img src={{userData.avatar_url}}>
+              </ion-avatar>
+              <ion-label><b>{{userData.login}}</b></ion-label>
+          </ion-item>
+
           <ion-card-title text-center>
-              {{userData.login}}
+              <i>{{userData.name}}</i>
           </ion-card-title>
       </ion-card-header>
-      <ion-card-subtitle text-center>   {{userData.name}}</ion-card-subtitle>
-      <ion-card-content> name: {{userData.name}}</ion-card-content>
+      <ion-card-subtitle text-center><i>{{userData.followers}} followers</i></ion-card-subtitle>
       <ion-card-content> location: {{userData.location}}</ion-card-content>
       <ion-card-content> company: {{userData.company}}</ion-card-content>
       <ion-card-content> blog: {{userData.blog}}</ion-card-content>

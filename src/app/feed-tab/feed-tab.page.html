@@ -16,7 +16,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-infinite-scroll threshold='100px' (ionInfinite)='loadData($event)' [disabled]='numTimesLeft <= 0'>
+    <ion-infinite-scroll threshold='100px' (ionInfinite)='loadUsers($event)' [disabled]='numTimesLeft <= 0'>
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
         loadingText="Loading more data...">
