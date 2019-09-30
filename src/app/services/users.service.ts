@@ -42,7 +42,7 @@ export class UsersService {
  getUsers(): Observable<any> {
   return this.http.get(`${this.url}users?since=135`).pipe(
     map(results => {
-      // console.log('RAW: ', results)
+      console.log('RAW: ', results)
       return results
    })
   );

@@ -16,9 +16,7 @@ export class Tab1Page implements OnInit{
 
   ngOnInit(){
     this.results = this.usersService.getUsers();
-    console.log(this.results)
+    // console.log("ON INIT:", this.results)
   }
-
-
 
 }
