@@ -47,6 +47,7 @@ export class UsersService {
     return this.store.select(getAllItems);
   }
 
+  //individual userData
   loadUserData(username: string) {
     return axios.get(`${this.url}users/` + `${username}`)
   }

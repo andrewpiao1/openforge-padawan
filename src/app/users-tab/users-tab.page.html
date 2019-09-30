@@ -13,7 +13,7 @@
       (keyup.enter)="searchUser(username.value)"
       showCancelButton="focus"
     ></ion-searchbar>
-    <ion-card>
+    <ion-card *ngIf="show">
       <ion-card-header>
           <img src={{userData.avatar_url}}>
           <ion-card-title text-center>

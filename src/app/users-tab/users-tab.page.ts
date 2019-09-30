@@ -14,6 +14,7 @@ import { AppState } from '../redux';
 
 export class UsersPage implements OnInit {
 
+  show: boolean = false;
   userData: any = [];
   userQuery: string
 
@@ -32,6 +33,7 @@ export class UsersPage implements OnInit {
   retrieveUsername() {
     this.events.subscribe('transferredData', (data) => {
       console.log('transferred: ', data)
+      this.show = true;
       this.userQuery = data;
       this.searchUser(data);
     })
