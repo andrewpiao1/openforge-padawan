@@ -12,8 +12,10 @@
 
     <ion-list>
       <ion-item *ngFor="let item of (users | async)" [routerLink]="['/', 'users', item.login]">
+        <ion-avatar slot="start">
+          <img src={{item.avatar_url}} />
+        </ion-avatar>
           {{item.login}}
-
       </ion-item>
     </ion-list>
 

@@ -12,7 +12,7 @@ export class UserEffects {
 
     @Effect()
     loadData = this.actions.pipe(
-        ofType(UserActions.ActionTypes.LoadDataSuccess),
+        ofType(UserActions.ActionTypes.LoadDataBegin),
         switchMap(() => {
             return this.userService.loadData().pipe(
                 map(data => new UserActions.LoadDataSuccess({ data: data })),
