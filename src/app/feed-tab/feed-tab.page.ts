@@ -55,6 +55,12 @@ export class FeedPage implements OnInit {
     // console.log("data sent: ", data)
   }
 
+  searchUser(username: string) {
+    console.log('Username: ', username);
+    this.user.dispatch(new fromData.LoadUserData(username))
+    this.user = this.usersService.loadUserData(username)
+  }
+
   // loadUsers(event) {
   //   setTimeout(() => {
   //     console.log('Done');
@@ -70,9 +76,5 @@ export class FeedPage implements OnInit {
   //   }
   // }
 
-  searchUser(username: string) {
-    console.log('Username: ', username);
-    this.user.dispatch(new fromData.LoadUserData(username))
-    this.user = this.usersService.loadUserData(username)
-  }
+
 }

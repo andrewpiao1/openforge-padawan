@@ -7,6 +7,8 @@ import { UsersService } from '../services/users.service'
 import * as UserActions from '../redux/users.action'
 
 
+// ---- NgRx 4: Effect to trigger when LoadDataBegin action is dispatched
+
 @Injectable()
 export class UserEffects {
     constructor(private actions: Actions, private userService: UsersService) { }

@@ -1,5 +1,7 @@
-import {ActionEx, UsersActionTypes} from './users.action';
 import * as fromData from './users.action';
+
+
+// ---- NgRx 2: Defining reducers for FEED data loading
 
 export interface DataState {
   items: string[];
@@ -20,7 +22,8 @@ export function reducer(
   action: fromData.ActionsUnion
 ): DataState {
   switch (action.type) {
-    case fromData.ActionTypes.LoadDataBegin: {
+    //from feed data actions
+    case fromData.ActionTypes.LoadDataBegin: { //returns new state
       return {
         ...state,
         loading: true,
@@ -44,8 +47,7 @@ export function reducer(
       };
     }
 
-
-    //change user metaData state
+    //from user data actions
     case fromData.ActionTypes.LoadUserData: {
       return {
         ...state,
@@ -68,5 +70,6 @@ export function reducer(
   }
 }
 
+//functions specifically to return items in the state
 export const getItems = (state: DataState) => state.items;
 export const getUser = (state: DataState) => state.user

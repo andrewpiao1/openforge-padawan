@@ -1,21 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import * as UserActions from '../redux/users.action';
 import { AppState, getAllItems, getDataState } from '../redux';
 import axios from 'axios';
-// import User from '../models/users'
 
-
-// import { map } from 'rxjs/operators';
-
-// export enum SearchType {
-//   all = '',
-//   user = 'user'
-// }
-
+//// ---- NgRx 3: provide a loadData() method that will return the HTTP request to load the data as an observable, which can be used in @Effect
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +20,7 @@ export class UsersService {
    * Constructor of the Service with Dependency Injection
    * @param http The standard Angular HttpClient to make requests
    */
+
   constructor(private store: Store<AppState>, private http: HttpClient) { }
 
   loadData() {
@@ -56,6 +48,10 @@ export class UsersService {
     return this.store.select(getAllItems);
   }
 
+  // searchData(title: string, type: SearchType): Observable<any> {
+  //   return this.http.get(`${this.url}?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`).pipe(
+  //     map(results => results['Search'])
+  //   );
 
 
   // loadUser() {
