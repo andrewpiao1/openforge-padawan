@@ -3,6 +3,12 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+export enum SearchType {
+  all = '',
+  user = 'user'
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +32,23 @@ export class UsersService {
   */
  searchData(userAvatar: string, userLogin: string): Observable<any> {
    return this.http.get(`${this.url}users?since=135`).pipe(
-     map(results => results['Users'])
+     map(results => {
+       console.log('RAW: ', results)
+       return results['Search']
+    })
    );
  }
+
+ getUsers(): Observable<any> {
+  return this.http.get(`${this.url}users?since=135`).pipe(
+    map(results => {
+      // console.log('RAW: ', results)
+      return results
+   })
+  );
+}
+
+//  getUsers(){
+//    return this.http.get(`${this.url}users?since=135`)
+//  }
 }
