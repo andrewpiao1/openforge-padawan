@@ -13,8 +13,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, metaReducers } from './redux';
-import { effects } from './effects'
+import { reducers, metaReducers } from './redux/index';
+import { effects } from './effects/effects.index'
 
 
 @NgModule({

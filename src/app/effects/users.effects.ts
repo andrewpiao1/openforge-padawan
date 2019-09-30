@@ -13,12 +13,13 @@ import * as UserActions from '../redux/users.action'
 export class UserEffects {
     constructor(private actions: Actions, private userService: UsersService) { }
 
+
     @Effect()
-    loadData = this.actions.pipe(
-        ofType(UserActions.ActionTypes.LoadDataBegin),
-        switchMap(() => {
+    loadData = this.actions.pipe(     //loadData() service is decorated with @Effect
+        ofType(UserActions.ActionTypes.LoadDataBegin), //listens for LoadDataBegin action
+        switchMap(() => {             //returns a new observable
             return this.userService.loadData().pipe(
-                map(data => new UserActions.LoadDataSuccess({ data: data })),
+                map(data => new UserActions.LoadDataSuccess({ data: data })), //successful loading triggers map
                 catchError(error =>
                     of(new UserActions.LoadDataFailure({ error: error }))
                 )

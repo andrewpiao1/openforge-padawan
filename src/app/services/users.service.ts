@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 
 import * as UserActions from '../redux/users.action';
-import { AppState, getAllItems, getDataState } from '../redux';
+import { AppState, getAllItems, getDataState } from '../redux/index';
 import axios from 'axios';
 
 //// ---- NgRx 3: provide a loadData() method that will return the HTTP request to load the data as an observable, which can be used in @Effect
@@ -23,10 +23,12 @@ export class UsersService {
 
   constructor(private store: Store<AppState>, private http: HttpClient) { }
 
-  loadData() {
-    return this.http.get(`${this.url}users`);
+  loadData(more=null) {
+    return (more) ? this.http.get(`${this.url}users`):
+                    this.http.get(`${this.url}users?since=46`)
   }
 
+  //call to trigger loading process -> subscribe to getData or getItems to grab state from our store
   load() {
     this.store.dispatch(new UserActions.LoadDataBegin());
   }

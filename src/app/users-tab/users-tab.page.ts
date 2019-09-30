@@ -4,7 +4,7 @@ import { UsersService } from '../services/users.service';
 import * as fromData from '../redux/users.action';
 import { Events } from "@ionic/angular";
 import { Store } from '@ngrx/store';
-import { AppState } from '../redux';
+import { AppState } from '../redux/index';
 
 @Component({
   selector: 'app-users-tab',
