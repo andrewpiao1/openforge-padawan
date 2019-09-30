@@ -6,4 +6,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class="ion-padding">
+    <ion-searchbar #username
+      placeholder="Enter username"
+      [(ngModel)]="userQuery"
+      (keyup.enter)="searchUser(username.value)"
+      showCancelButton="focus"
+    ></ion-searchbar>
+    <ion-card>
+      <ion-card-header>
+          <img src={{userData.avatar_url}}>
+          <ion-card-title text-center>
+              {{userData.login}}
+          </ion-card-title>
+      </ion-card-header>
+      <ion-card-subtitle text-center>   {{userData.name}}</ion-card-subtitle>
+      <ion-card-content> name: {{userData.name}}</ion-card-content>
+      <ion-card-content> location: {{userData.location}}</ion-card-content>
+      <ion-card-content> company: {{userData.company}}</ion-card-content>
+      <ion-card-content> blog: {{userData.blog}}</ion-card-content>
+    </ion-card>
+
+
+</ion-content>
+

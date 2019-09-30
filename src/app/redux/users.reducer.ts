@@ -5,12 +5,14 @@ export interface DataState {
   items: string[];
   loading: boolean;
   error: any;
+  user: any;
 }
 
 export const initialState: DataState = {
   items: [],
   loading: false,
-  error: null
+  error: null,
+  user: {}
 }
 
 export function reducer(
@@ -42,6 +44,22 @@ export function reducer(
       };
     }
 
+    case fromData.ActionTypes.LoadUserData: {
+      return {
+        ...state,
+        loading: true,
+        user: action.payload.toString
+      }
+    }
+
+    case fromData.ActionTypes.LoadUserDataSuccess: {
+      return {
+        ...state,
+        loading: false,
+        user: action.payload.data
+      }
+    }
+
     default: {
       return state;
     }
@@ -49,17 +67,4 @@ export function reducer(
 }
 
 export const getItems = (state: DataState) => state.items;
-
-// export const initialState = [];
-
-// export function UsersReducer (state = initialState, action: ActionEx){
-//   switch (action.type){
-//     case UsersActionTypes.InitialLoad:
-//       return [action.payload];
-
-//     case UsersActionTypes.AddUsers:
-//       return [...state, action.payload];
-
-//     default: return state;
-//   }
-// }
+export const getUser = (state: DataState) => state.user

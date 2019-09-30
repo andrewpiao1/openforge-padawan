@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import * as UserActions from '../redux/users.action';
 import { AppState, getAllItems, getDataState } from '../redux';
+import axios from 'axios';
+// import User from '../models/users'
 
 
-// import { Observable } from 'rxjs';
 // import { map } from 'rxjs/operators';
 
 // export enum SearchType {
@@ -21,6 +23,7 @@ import { AppState, getAllItems, getDataState } from '../redux';
 export class UsersService {
   url = 'https://api.github.com/'
   apiKey = '';
+  user = {}
 
   /**
    * Constructor of the Service with Dependency Injection
@@ -29,7 +32,7 @@ export class UsersService {
   constructor(private store: Store<AppState>, private http: HttpClient) { }
 
   loadData() {
-    return this.http.get(`${this.url}users?since=135`);
+    return this.http.get(`${this.url}users`);
   }
 
   load() {
@@ -44,31 +47,17 @@ export class UsersService {
     return this.store.select(getAllItems);
   }
 
-  /**
-  * Get data from the Github User API
-  * map the result to return only the results that we need
-  *
-  * @param {string} userAvatar User's avatar URL
-  * @param {string} userLogin User's login
-  * @returns Observable with the search results
-  */
-  // searchData(userAvatar: string, userLogin: string): Observable<any> {
-  //   return this.http.get(`${this.url}users?since=135`).pipe(
-  //     map(results => {
-  //       console.log('RAW: ', results)
-  //       return results['Search']
-  //     })
-  //   );
+  loadUserData(username: string) {
+    return axios.get(`${this.url}users/` + `${username}`)
+  }
+
+  getUserData() {
+    return this.store.select(getAllItems);
+  }
+
+
+
+  // loadUser() {
+  //   this.store.dispatch(new UserActions.LoadUserData())
   // }
-
-  // getUsers(): Observable<any> {
-  //   return this.http.get(`${this.url}users?since=135`).pipe(
-  //     map(results => {
-  //       console.log('RAW: ', results)
-  //       return results
-  //     })
-  //   );
-  // }
-
-
 }

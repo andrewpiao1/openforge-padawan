@@ -1,3 +1,3 @@
-export class Users {
+export default class User {
   userName: String = '';
 }
