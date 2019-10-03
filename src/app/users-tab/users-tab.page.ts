@@ -21,16 +21,18 @@ export class UsersPage implements OnInit {
   constructor(
     private store: Store<AppState>,
     private usersService: UsersService,
-    public events: Events) { }
+    public events: Events) {
+
+    }
 
   ngOnInit() {
-    //   this.users = this.usersService.getItems();
-    this.userData = [];
     this.retrieveUsername();
+
     // this.searchUser();
   }
 
   retrieveUsername() {
+    console.log('ACTIVATED')
     this.events.subscribe('transferredData', (data) => {
       console.log('transferred: ', data)
       this.userQuery = data;
@@ -44,7 +46,7 @@ export class UsersPage implements OnInit {
     this.usersService.loadUserData(username)
       .then(res => {
         this.userData = res.data
-        console.log(this.userData);
+        // console.log(this.userData);
       })
       .catch(err => console.log(err))
   }

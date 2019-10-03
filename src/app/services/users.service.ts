@@ -23,10 +23,12 @@ export class UsersService {
 
   constructor(private store: Store<AppState>, private http: HttpClient) { }
 
-  loadData(more=null) {
-    return (more) ? this.http.get(`${this.url}users`):
-                    this.http.get(`${this.url}users?since=46`)
+  loadData() {
+    return this.http.get(`${this.url}users?rel=0&per_page=100`)
   }
+
+  //https://api.github.com/users?rel=0&per_page=100
+
 
   //call to trigger loading process -> subscribe to getData or getItems to grab state from our store
   load() {
