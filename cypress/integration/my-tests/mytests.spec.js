@@ -1,4 +1,6 @@
-xdescribe("Initial page load", ()=>{
+
+
+xdescribe("Initial page and components load", ()=>{
   beforeEach(()=>{
     cy.visit('http://localhost:8100/')
   })
@@ -31,7 +33,7 @@ xdescribe("Initial page load", ()=>{
 
 })
 
-describe("Navigation", ()=>{
+xdescribe("Navigation", ()=>{
   beforeEach(()=>{
     cy.visit('http://localhost:8100/')
   })
@@ -64,7 +66,25 @@ describe("Navigation", ()=>{
 
     //successfully loaded entries
     cy.get('ion-item').should('have.length.greaterThan', 10)
-
   })
 
+})
+
+describe('Search input form', ()=>{
+  beforeEach(()=>{
+    cy.visit('http://localhost:8100')
+  })
+  it ('should accepts input', ()=>{
+    cy.get('ion-tab-button[tab="users-tab"]').click();
+    cy.get('ion-card').should('not.be.visible')
+
+    const typedText = "mojombo"
+    cy.get('ion-searchbar')
+      .type(typedText) //chain type command onto the get
+      .should('have.value', typedText) //ensure field's value matches the type
+      .type('{enter}')
+
+      // cy.get('ion-card').should('be.visible')
+      //   .and('contains', typedText)
+  })
 })

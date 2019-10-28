@@ -8,6 +8,7 @@
 
 <ion-content class="ion-padding">
     <ion-searchbar #username
+      class="username"
       placeholder="Enter username"
       [(ngModel)]="userQuery"
       (keyup.enter)="searchUser(username.value)"
