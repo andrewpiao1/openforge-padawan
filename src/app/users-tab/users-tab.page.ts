@@ -5,6 +5,7 @@ import * as fromData from '../redux/users.action';
 import { Events } from "@ionic/angular";
 import { Store } from '@ngrx/store';
 import { AppState } from '../redux/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-tab',
@@ -21,20 +22,18 @@ export class UsersPage implements OnInit {
   constructor(
     private store: Store<AppState>,
     private usersService: UsersService,
+    private route:Router,
     public events: Events) {
-
     }
 
   ngOnInit() {
-    this.retrieveUsername();
-
-    // this.searchUser();
+    this.retrieveUsername()
   }
 
   retrieveUsername() {
     console.log('ACTIVATED')
     this.events.subscribe('transferredData', (data) => {
-      console.log('transferred: ', data)
+      console.log('received: ', data)
       this.userQuery = data;
       this.searchUser(data);
     })

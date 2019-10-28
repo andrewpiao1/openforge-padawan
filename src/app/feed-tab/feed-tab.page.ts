@@ -50,7 +50,6 @@ export class FeedPage implements OnInit {
     setTimeout(() => {
       console.log('Done');
 
-
       for (let i=0; i<15; i++){
         let currIndex = this.users.length;
         this.users.push(this.state[currIndex])
@@ -71,13 +70,13 @@ export class FeedPage implements OnInit {
   }
 
   goToTabs(event: any){
-    console.log("CLICKED: ", event.target.innerText)
+    // console.log("CLICKED: ", event.target.innerText)
     this.sendData(event.target.innerText)
-    this.navCtrl.navigateRoot('/tabs/users-tab')
+    this.navCtrl.navigateRoot('tabs/users-tab')
   }
   sendData(data){
     this.events.publish('transferredData', data)
-    // console.log("data sent: ", data)
+    console.log("data sent: ", data)
   }
 
   searchUser(username: string) {
