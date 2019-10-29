@@ -95,7 +95,7 @@ describe('Navigation', ()=>{
     cy.get('ion-searchbar').should('be.visible')
   })
 
-  it('should navigate back to Feed tab and successfully load content', ()=>{
+  it('should navigate back to Feed tab and successfully load content and feed checked against Github API request', ()=>{
     //navigate to feed-tab
     cy.get('ion-tab-button[tab="feed-tab"]').click();
     cy.contains('Users Feed').should('be.visible')
