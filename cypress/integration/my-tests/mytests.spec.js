@@ -66,6 +66,7 @@ describe('Navigation', ()=>{
     cy.visit('http://localhost:8100/tabs/feed-tab/')
     cy.get('ion-item').should('have.length.greaterThan', 10)
 
+    //testing correct github API content retrieved
     cy.request({
       method: 'get',
       url: 'https://api.github.com/users?rel=0&per_page=100',
@@ -76,7 +77,7 @@ describe('Navigation', ()=>{
     })
       .then((res)=>{
         user = res.body[0].login //'mojombo'
-        cy.get('ion-item').should('contain', user)
+        cy.get('ion-item').first().should('contain', user)
       })
 
     //should go to correct endpoint
@@ -108,6 +109,30 @@ describe('Navigation', ()=>{
 })
 
 describe('Actions', ()=>{
+  let clickedUser;
+
+  it('should navigate to Search/User tab when user clicked from feed', ()=>{
+    cy.visit('http://localhost:8100/')
+    cy.reload()
+
+    cy.get('ion-tab-button[tab="users-tab"]').click();
+    cy.get('ion-tab-button[tab="feed-tab"]').click();
+
+    clickedUser = cy.get('ion-item:first').invoke('text') //to retrieve text of the element
+      .then((text)=>{
+        clickedUser = text.trim() //remove spaces
+        // console.log("CLICKED: ", clickedUser)
+      })
+
+    cy.get('ion-item:first').click({force:true}) //force so it doesn't wait for actionable state
+
+    cy.url().should('include', 'tabs/users-tab') //should nav to new tab
+  })
+
+  it ('should display correct clicked user data in redirected tab', ()=>{
+    //access text from user card label
+    cy.get('ion-label:first').should('have.text', clickedUser)
+  })
 
 })
 
