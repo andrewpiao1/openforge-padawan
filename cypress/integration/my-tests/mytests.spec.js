@@ -1,3 +1,4 @@
+import { isContext } from "vm"
 
 
 xdescribe("Initial page and components load", ()=>{
@@ -21,7 +22,6 @@ xdescribe("Initial page and components load", ()=>{
   })
 
   it('should query and render both ionic tab navigator ', ()=>{
-
     cy.get('ion-tab-button').should('be.visible')
       .and('have.length', 2)
   })
@@ -73,18 +73,35 @@ xdescribe("Navigation", ()=>{
 describe('Search input form', ()=>{
   beforeEach(()=>{
     cy.visit('http://localhost:8100')
-  })
-  it ('should accepts input', ()=>{
     cy.get('ion-tab-button[tab="users-tab"]').click();
-    cy.get('ion-card').should('not.be.visible')
+  })
 
-    const typedText = "mojombo"
+  const typedText = "mojombo"
+
+  it ('should not display a user card upon initial load', ()=>{
+    cy.get('ion-card').should('not.be.visible')
+  })
+
+  it ('should accept text input', ()=>{
+
     cy.get('ion-searchbar')
       .type(typedText) //chain type command onto the get
-      .should('have.value', typedText) //ensure field's value matches the type
-      .type('{enter}')
-
-      // cy.get('ion-card').should('be.visible')
-      //   .and('contains', typedText)
+      .should('be.visible')
+      .and('have.value', typedText) //ensure field's value matches the type
   })
+
+  context('should properly handle submission of search input', ()=>{
+    beforeEach (()=>{
+      cy.get('ion-searchbar')
+        .type(typedText)
+        .type('{enter}')
+    })
+
+    it ('should display correct user card upon submission', ()=>{
+      cy.get('ion-card').should('be.visible')
+        .and('contain', typedText)
+    })
+  })
+
 })
+
