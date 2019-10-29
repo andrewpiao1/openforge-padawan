@@ -26,11 +26,6 @@ const routes: Routes = [
               import('../users-tab/users-tab.module').then(m => m.UsersPageModule)
           }
         ]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/feed-tab',
-        pathMatch: 'full'
       }
     ]
   },

@@ -24,19 +24,16 @@ export class UsersPage implements OnInit {
     private usersService: UsersService,
     private route:Router,
     public events: Events) {
+      this.events.subscribe('transferredData', (data) => {
+        console.log('received: ', data)
+        if (data){
+          this.userQuery = data;
+          this.searchUser(data);
+        }
+      })
     }
 
   ngOnInit() {
-    this.retrieveUsername()
-  }
-
-  retrieveUsername() {
-    console.log('ACTIVATED')
-    this.events.subscribe('transferredData', (data) => {
-      console.log('received: ', data)
-      this.userQuery = data;
-      this.searchUser(data);
-    })
   }
 
   searchUser(username: string) {

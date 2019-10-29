@@ -22,7 +22,7 @@ describe("Initial page and components load", ()=>{
     cy.get('ion-tab-bar').should('be.visible')
   })
 
-  it('should query and render both ionic tab navigator ', ()=>{
+  it('should query and render both ionic tab navigators', ()=>{
     cy.get('ion-tab-button').should('be.visible')
       .and('have.length', 2)
   })
@@ -138,7 +138,8 @@ describe('Actions', ()=>{
 
 describe('Search input form', ()=>{
   beforeEach(()=>{
-    cy.visit('http://localhost:8100')
+    cy.visit('http://localhost:8100/')
+    cy.reload()
     cy.get('ion-tab-button[tab="users-tab"]').click();
   })
 

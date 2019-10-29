@@ -28,6 +28,7 @@ export class FeedPage implements OnInit {
   user: any = {};
   users: any = [];
   state: any = [];
+  transferredData
 
   constructor(
     private usersService: UsersService,
@@ -35,13 +36,16 @@ export class FeedPage implements OnInit {
     public events: Events) {
     }
 
+  //make sure publisher is publishing AFTER second page has already subscribed
+  ionViewDidLeave(){
+    this.events.publish('transferredData', this.transferredData)
+  }
+
   ngOnInit() {
     this.usersService.getItems().subscribe(data => {
       this.state = data;
       this.users = this.state.slice(0,15)
-      // this.users.push(...data);
-
-      console.log('data retrieved', data)
+      // console.log('data retrieved', data)
     })
   }
 
@@ -71,12 +75,8 @@ export class FeedPage implements OnInit {
 
   goToTabs(event: any){
     // console.log("CLICKED: ", event.target.innerText)
-    this.sendData(event.target.innerText)
-    this.navCtrl.navigateRoot('tabs/users-tab')
-  }
-  sendData(data){
-    this.events.publish('transferredData', data)
-    console.log("data sent: ", data)
+    this.transferredData = event.target.innerText
+    this.navCtrl.navigateRoot('/tabs/users-tab')
   }
 
   searchUser(username: string) {
