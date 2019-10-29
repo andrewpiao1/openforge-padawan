@@ -1,7 +1,8 @@
 import { isContext } from "vm"
+import { AssertionError } from "assert"
 
 
-xdescribe("Initial page and components load", ()=>{
+describe("Initial page and components load", ()=>{
   beforeEach(()=>{
     cy.visit('http://localhost:8100/')
   })
@@ -33,16 +34,52 @@ xdescribe("Initial page and components load", ()=>{
 
 })
 
-xdescribe("Navigation", ()=>{
+describe('GitHub API', ()=>{
+  it ('should make requests to GitHub API', ()=>{
+    cy.request({
+      method: 'get',
+      url: 'https://api.github.com/users?rel=0&per_page=100',
+      headers:{
+        'accept':'application/json'
+      },
+      response: []
+    })
+      .then((res)=>{
+        cy.log(res.body)
+        assert.equal(res.status, 200);
+        expect(res.body).to.not.be.null;
+        expect(res.body).to.be.a('array')
+        expect(res.body).to.have.length(100)
+      })
+  })
+})
+
+describe('Navigation', ()=>{
   beforeEach(()=>{
     cy.visit('http://localhost:8100/')
   })
 
   it('should go feed tab and successfully load content', ()=>{
+    let user;
+
     //navigate to feed-tab
     cy.visit('http://localhost:8100/tabs/feed-tab/')
     cy.get('ion-item').should('have.length.greaterThan', 10)
 
+    cy.request({
+      method: 'get',
+      url: 'https://api.github.com/users?rel=0&per_page=100',
+      headers:{
+        'accept':'application/json'
+      },
+      response: []
+    })
+      .then((res)=>{
+        user = res.body[0].login //'mojombo'
+        cy.get('ion-item').should('contain', user)
+      })
+
+    //should go to correct endpoint
     cy.url().should('include', 'tabs/feed-tab')
   })
 
@@ -67,6 +104,10 @@ xdescribe("Navigation", ()=>{
     //successfully loaded entries
     cy.get('ion-item').should('have.length.greaterThan', 10)
   })
+
+})
+
+describe('Actions', ()=>{
 
 })
 
@@ -104,4 +145,3 @@ describe('Search input form', ()=>{
   })
 
 })
-
