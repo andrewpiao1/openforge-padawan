@@ -1,14 +1,18 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title class="feedtab">
-      Users Feed
+      Users Feed    <!-- Title of this tab page   -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
-      <ion-item *ngFor="let item of users" [routerLink]="['/', 'users', item.login]" (click)="goToTabs($event)">
+      <ion-item
+
+        *ngFor="let item of users"
+        [routerLink]="['/', 'users', item.login]"
+        (click)="goToTabs($event)">
         <ion-avatar slot="start">
           <img src={{item.avatar_url}} />
         </ion-avatar>
